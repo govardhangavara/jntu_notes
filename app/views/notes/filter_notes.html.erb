@@ -1,0 +1,13 @@
+<h1>Notes for <%= @branch %> - <%= @year %> - <%= @subject %></h1>
+<% if @notes.present? %>
+<ul>
+  <% @notes.each do |note| %>
+    <li>
+      <%= note.title %> -
+      <%= link_to "Download", rails_blob_path(note.file, disposition: "attachment") if note.file.attached? %>
+    </li>
+  <% end %>
+<% else %>
+    <p> No Notes available for this selection.</p>
+<% end %>
+</ul>

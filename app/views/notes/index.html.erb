@@ -1,0 +1,48 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Notes" %>
+
+<h1>Notes</h1>
+
+<!-- Search Bar -->
+<%= form_with url: notes_path, method: :get, local: true do |form| %>
+  <%= form.text_field :search, placeholder: "Search by title, subject, year, or branch" %>
+  <%= form.submit "Search" %>
+<% end %>
+
+<div id="notes">
+  <% @notes.each do |note| %>
+    <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+      <p><strong>Title:</strong> <%= note.title %></p>
+      <p><strong>Subject:</strong> <%= note.subject %></p>
+      <p><strong>Year:</strong> <%= note.year %></p>
+      <p><strong>Branch:</strong> <%= note.branch %></p>
+
+      
+      <p>
+        <%= link_to "Show", note %> |
+        <%= link_to "Edit", edit_note_path(note) %> |
+        <%= link_to "Destroy", note, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      </p>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "New Note", new_note_path %>
+<h1>All Notes</h1>
+
+<p>
+  <%= link_to "Browse by Branch/Year/Subject", select_branch_path, class: "btn btn-primary" %>
+</p>
+
+<% if @notes.present? %>
+  <ul>
+    <% @notes.each do |note| %>
+      <li>
+        <%= link_to note.title, note_path(note) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No notes available yet.</p>
+<% end %>

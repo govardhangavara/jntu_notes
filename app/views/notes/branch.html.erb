@@ -1,0 +1,9 @@
+<h1>Select Branch</h1>
+
+<ul>
+  <% ["CSE", "ECE", "EEE", "CSM", "AID"].each do |branch| %>
+    <li>
+      <%= link_to branch, select_year_path(branch: branch) %>
+    </li>
+  <% end %>
+</ul>

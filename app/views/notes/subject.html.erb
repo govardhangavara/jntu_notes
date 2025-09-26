@@ -1,0 +1,10 @@
+<h1>Select Subject</h1>
+
+
+<ul>
+    <% @subjects.each do |subject| %>
+        <li>
+            <%= link_to subject, select_notes_path(branch: @branch, year: @year, subject: subject) %>
+        </li>
+    <% end %>
+</ul>
